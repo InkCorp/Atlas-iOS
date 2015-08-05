@@ -104,10 +104,7 @@ static CGFloat const ATLMaxScrollDistanceFromBottom = 150;
     if (self.presentedViewController) {
         [self.view becomeFirstResponder];
     }
-    if (self.addressBarController && self.firstAppearance) {
-        [self updateTopCollectionViewInset];
-    }
-    [self updateBottomCollectionViewInset];
+    
 }
 
 - (void)viewDidLayoutSubviews
@@ -119,6 +116,12 @@ static CGFloat const ATLMaxScrollDistanceFromBottom = 150;
     if (!self.presentedViewController && self.navigationController && !self.view.inputAccessoryView.superview) {
         [self.view becomeFirstResponder];
     }
+    
+    if (self.addressBarController && self.firstAppearance) {
+        [self updateTopCollectionViewInset];
+    }
+    
+    [self updateBottomCollectionViewInset];
     
     if (self.isFirstAppearance) {
         self.firstAppearance = NO;
