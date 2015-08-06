@@ -212,17 +212,13 @@ static CGFloat const ATLMaxScrollDistanceFromBottom = 150;
 
 #pragma mark - Notification Handlers
 
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-    [self configureWithKeyboardNotification:notification];
-}
-
-- (void)keyboardWillHide:(NSNotification *)notification
+- (void)keyboardWillChangeFrame:(NSNotification *)notification
 {
     if (![self.navigationController.viewControllers containsObject:self]) {
         return;
     }
     [self configureWithKeyboardNotification:notification];
+    
 }
 
 - (void)messageInputToolbarDidChangeHeight:(NSNotification *)notification
@@ -345,8 +341,7 @@ static CGFloat const ATLMaxScrollDistanceFromBottom = 150;
 - (void)atl_baseRegisterForNotifications
 {
     // Keyboard Notifications
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
     // ATLMessageInputToolbar Notifications
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:self.messageInputToolbar.textInputView];
