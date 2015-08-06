@@ -278,6 +278,12 @@ static CGFloat const ATLMaxScrollDistanceFromBottom = 150;
     [UIView setAnimationBeginsFromCurrentState:YES];
     [self updateBottomCollectionViewInset];
     [self.view layoutIfNeeded];
+    
+    //Scroll to bottom if keyboard is being shown
+    if (keyboardBeginFrame.origin.y > keyboardEndFrame.origin.y) {
+        [self scrollToBottomAnimated:YES];
+    }
+    
     [UIView commitAnimations];
 }
 
